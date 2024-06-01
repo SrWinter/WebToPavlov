@@ -91,14 +91,25 @@
     {% if 'logged_in' in session %}
     <p>Welcome, {{ session.username }}! <a href="/logout">Logout</a></p>
     <button onclick="showSection('update-file')">Update File</button>
+    <button onclick="showSection('get-file')">Get File</button>
     {% if session.username == 'admin' %}
     <button onclick="showSection('manage-users')">Manage Users</button>
     {% endif %}
 
-    <div id="update-file" class="section active">
+    <div id="get-file" class="section">
+        <h2>Get File by Name</h2>
+        <form action="/get-file" method="post">
+            <label for="file_name">Enter .txt file name:</label>
+            <input type="text" id="file_name" name="file_name">
+            <input type="submit" value="Get File">
+        </form>
+    </div>
+
+    <div id="update-file" class="section">
         <h2>Update File Contents</h2>
-        <form action="/" method="post">
-            <input type="hidden" name="action" value="update">
+        <form action="/update-file" method="post">
+            <label for="file_name_update">Enter .txt file name:</label>
+            <input type="text" id="file_name_update" name="file_name_update" value="{{ file_name }}">
             <label for="new_content">New File Contents:</label>
             <textarea id="new_content" name="new_content" rows="20" cols="100">{{ content }}</textarea>
             <input type="submit" value="Update File Contents">
