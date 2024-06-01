@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Pavlov VR Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            margin-top: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .section {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="password"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"], button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover, button:hover {
+            background-color: #45a049;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 5px;
+        }
+        .messages {
+            margin-bottom: 20px;
+        }
+        .messages ul {
+            padding-left: 0;
+        }
+        .messages li {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+        .messages .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .messages .danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+    <script>
+        function showSection(section) {
+            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>Manage Pavlov VR Server</h1>
+
+    {% if 'logged_in' in session %}
+    <p>Welcome, {{ session.username }}! <a href="/logout">Logout</a></p>
+    <button onclick="showSection('update-file')">Update File</button>
+    {% if session.username == 'admin' %}
+    <button onclick="showSection('manage-users')">Manage Users</button>
+    {% endif %}
+
+    <div id="update-file" class="section active">
+        <h2>Update File Contents</h2>
+        <form action="/" method="post">
+            <input type="hidden" name="action" value="update">
+            <label for="new_content">New File Contents:</label>
+            <textarea id="new_content" name="new_content" rows="20" cols="100">{{ content }}</textarea>
+            <input type="submit" value="Update File Contents">
+        </form>
+    </div>
+
+    {% if session.username == 'admin' %}
+    <div id="manage-users" class="section">
+        <h2>Manage Users</h2>
+        <form action="/" method="post">
+            <input type="hidden" name="action" value="create_user">
+            <label for="new_username">New Username:</label>
+            <input type="text" id="new_username" name="new_username">
+            <label for="new_password">New Password:</label>
+            <input type="password" id="new_password" name="new_password">
+            <input type="submit" value="Create User">
+        </form>
+        <h3>Existing Users:</h3>
+        <ul>
+            {% for user in users %}
+            <li>{{ user }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% endif %}
+</div>
+</body>
+</html>
