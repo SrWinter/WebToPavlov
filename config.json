@@ -1,0 +1,14 @@
+{
+  "users": {
+    "test": "test",
+    "tester2": "test1",
+    "user2": "password2",
+    "user3": "password3"
+  },
+  "sftp": {
+    "host": "your-sftp-host",
+    "port": 2022,
+    "username": "your-sftp-username",
+    "password": "your-sftp-password"
+  }
+}
