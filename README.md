@@ -115,5 +115,5 @@ Feel free to fork this repository, create a new branch, and make improvements. P
 
 ## Support
 
-If you encounter any issues or have questions, please join our discord @ [Discord.gg](https://discord.gg/JxF4hGaxc2)
+If you encounter any issues or have questions, please join our discord @ [Discord Here](https://discord.gg/JxF4hGaxc2)
 
