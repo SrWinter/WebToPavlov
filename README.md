@@ -2,6 +2,8 @@
 
 This is a Flask application that allows users to manage files on an SFTP server. Users can log in, view, and update files stored on the server. The application reads user credentials and SFTP credentials from a `config.json` file.
 
+!! This was created to be used as a Simple Website File loader that would load files from a STFP server and then would edit those files for people using Unreal Engine Blueprints to create a Whuitelist system for certain things. !!
+
 ## Features
 
 - User authentication
